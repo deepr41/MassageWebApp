@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "718048000354",
+    "firebase_url": "https://massageapp-ee29e.firebaseio.com",
+    "project_id": "massageapp-ee29e",
+    "storage_bucket": "massageapp-ee29e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718048000354:android:a5a9dc4c42a78a43",
+        "android_client_info": {
+          "package_name": "com.example.vivek.massageapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718048000354-1rjg8i0v6mbrioaq4joa3jd6vu3cu1jk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vivek.massageapp",
+            "certificate_hash": "2bb4afc07210e3aea3ccd4c0eb069cdeb6a7b00e"
+          }
+        },
+        {
+          "client_id": "718048000354-0inme3bo9uvc3ajq6lkflmqfl7nsgi04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVM9hl6UX2b-VnhpY9aP5JujeW4mOuPSc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718048000354-0inme3bo9uvc3ajq6lkflmqfl7nsgi04.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
