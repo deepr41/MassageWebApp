@@ -1,0 +1,11 @@
+.card .header-primary, .card .content-primary {
+    background: linear-gradient(60deg, #93699a, #1a237e);
+}
+.contactus-1{
+  min-height: 100vh;
+  height: auto;
+  padding-top: 25vh;
+}
+.btn.btn-primary{
+  background-color: #1a237e;
+}

@@ -1,0 +1,133 @@
+.card .header-primary, .card .content-primary {
+    background: linear-gradient(60deg, #93699a, #1a237e);
+}
+.contactus-1{
+  min-height: 100vh;
+  height: auto;
+  padding-top: 25vh;
+}
+.btn.btn-primary{
+  background-color: #1a237e;
+}
+
+.team-4{
+  min-height: 100vh;
+  height: auto;
+  padding-top: 20vh;
+}
+.content-rose{
+  background: linear-gradient(60deg, #1a237e, #c2185b)!important;
+}
+.indigo{
+    background-color:#1A237E!important;
+}
+.btn-blue{
+  background-color: #283593!important;
+}
+.carousel .item {
+    opacity: 0.8;
+}
+.nav-pills.nav-pills-rose > li.active > a, .nav-pills.nav-pills-rose > li.active > a:focus, .nav-pills.nav-pills-rose > li.active > a:hover {
+    background-color:#1A237E!important;
+}
+#morphing{
+  background: #e5e5e5;
+}
+#pricing-2{
+  background: #fff;
+}
+.front{
+  background: #f5eeee;
+}
+
+
+.font-28{
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.font-43{
+  font-size: 43px;
+}
+
+.video-section{
+  padding-top: 68px;
+  height: 150px;
+  background-image: url("../img/dg1.jpg");
+  color: white;
+  opacity: 0.7;
+}
+
+.no-margin-left-right{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.how-section{
+  background-color: white !important;
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .video-section{
+      padding-top:42px;
+      height: 100px;
+    }
+    .font-sm-16{
+      font-size: 16px;
+    }
+    .font-sm-30{
+      font-size: 30px;
+    }
+}
+
+.circle{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.text-light{
+  color: white !important;
+}
+
+.newsletter-section{
+  height: 150px;
+  background-image: linear-gradient(45deg, rgb(64, 149, 204) 0%, rgb(0, 47, 187) 100%);
+  padding-top: 65px;
+  font-size: 24px;
+}
+
+input[type="email"]
+{
+    background: transparent;
+    border: none;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: white;
+}
+
+.blue-gradient{
+  background-image: linear-gradient(45deg, rgb(64, 149, 204) 0%, rgb(0, 47, 187) 100%);
+}
+
+.white-background{
+  background-color: white;
+  color: black;
+}

@@ -1,11 +1,15 @@
-
-
 var formidable = require('formidable');
 var fs = require('fs');
+var bodyParser = require('body-parser'); 
 var express = require('express')
 var app = express()
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/mydb"
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static('public'));
 
 var mongocon = function(){
     var date = new Date()
@@ -26,6 +30,135 @@ function addFile(name,owner,date,path){
     });
 
 }
+
+
+app.get('/signup.html',function(req,res){
+    //res.writeHead(200, {'Content-Type': 'text/html'});
+    res.sendFile( __dirname + "/" + "signup.html" );
+    return res.end()
+})
+
+app.post('/signup',function(req,res){
+    //res.writeHead(200, {'Content-Type': 'text/html'});
+    console.log(JSON.stringify(req.body));
+    var email = req.body.email;
+    var pass = req.body.pass;
+    var fname = req.body.fname;
+    var lname = req.body.lname;
+
+    MongoClient.connect(url,function(err,db){
+        if(err) throw err;
+        var dbo = db.db('mydb');
+        console.log(email+" : "+pass);
+        dbo.collection('myTable').insert({email:email, pass:pass, fname:fname, lname:lname}, function(err, result){
+            if(err){
+                res.end("Failure");
+                return;
+            }
+            res.end("Success");
+        })
+    });
+})
+
+app.post('/update',function(req,res){
+    //res.writeHead(200, {'Content-Type': 'text/html'});
+    console.log(JSON.stringify(req.body));
+    var email = req.body.email;
+    var fname = req.body.fname;
+    var lname = req.body.lname;
+
+    MongoClient.connect(url,function(err,db){
+        if(err) throw err;
+        var dbo = db.db('mydb');
+        //console.log(email+" : "+pass);
+        dbo.collection('myTable').update({email:email}, {$set:{fname:fname, lname:lname}}, function(err, result){
+            if(err){
+                res.end("Failure");
+                return;
+            }
+            res.end("Success");
+        })
+    });
+})
+
+app.post('/delete',function(req,res){
+    //res.writeHead(200, {'Content-Type': 'text/html'});
+    console.log(JSON.stringify(req.body));
+    var email = req.body.email;
+
+    MongoClient.connect(url,function(err,db){
+        if(err) throw err;
+        var dbo = db.db('mydb');
+        //console.log(email+" : "+pass);
+        dbo.collection('myTable').deleteOne({email:email}, function(err, result){
+            if(err){
+                res.end("Failure");
+                return;
+            }
+            res.end("Success");
+        })
+    });
+})
+
+
+app.get('/loginpage.html',function(req,res){
+    //res.writeHead(200, {'Content-Type': 'text/html'});
+    res.sendFile( __dirname + "/" + "loginpage.html" );
+    return res.end()
+})
+app.post('/login', function(req, res){
+    console.log(JSON.stringify(req.body));
+    var email = req.body.email;
+    var pass = req.body.pass;
+    MongoClient.connect(url,function(err,db){
+        if(err) throw err;
+        var dbo = db.db('mydb');
+        console.log(email+" : "+pass);
+        dbo.collection('myTable').findOne({email:email, pass:pass}, function(err, result){
+            if(err){
+                res.end("Failure");
+                return;
+            }
+
+            console.log(result);
+            if(!result){
+                res.end("Failure");
+            }else{
+                res.end("Success");
+            }
+        })
+        
+
+    });
+})
+
+
+app.get('/profile.html',function(req,res){
+    res.sendFile( __dirname + "/" + "profile.html" );
+    return res.end()
+})
+
+app.post('/fetch', function(req, res){
+    console.log(JSON.stringify(req.body));
+    var email = req.body.email;
+
+    MongoClient.connect(url,function(err,db){
+        if(err) throw err;
+        var dbo = db.db('mydb');
+        //console.log(email+" : "+pass);
+        dbo.collection('myTable').findOne({email:email}, function(err, result){
+            if(err){
+                res.end("Failure");
+                return;
+            }
+            console.log(result);
+            res.end(JSON.stringify(result));
+        })
+        
+
+    });
+})
+
 // function delFile(name)
 
 app.get('/addFile',function(req,res){
