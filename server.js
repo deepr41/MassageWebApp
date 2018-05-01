@@ -33,7 +33,6 @@ app.get('/addFile',function(req,res){
     res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
     res.write('Owner : <input type="text" name="owner"/>');
     res.write('<input type="file" name="filetoupload"><br>');
-
     res.write('<input type="submit">');
     res.write('</form>');
     return res.end()
@@ -65,13 +64,44 @@ app.post('/deleteFile',function(req,res){
             var dbo = db.db('mydb');
             var query = {name : fields.delName}
             dbo.collection('Files').find(query).toArray(function(err,res){
-                console.log(res)
-                for(i=0;i,res.length;i++){
+                console.log(res[0].name)
+                function myUnlink(i,res){
                     fs.unlink(res[i].path,function(err){
                         if(err) throw err
                     });
+                    console.log(res[i].name)
                 }
+                for(i=0;i<res.length;i++){
+                    myUnlink(i,res);
+                    }
+                res.writeHead(200, {'Content-type':'text/html'});
+                res.write("File successfully deleted")
+                res.end();
+            });
+        });
+    });
+})
 
+app.post('/deleteAll',function(req,res){
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        MongoClient.connect(url,function(err,db){
+            if(err) throw err;
+            var dbo = db.db('mydb');
+            dbo.collection('Files').find({}).toArray(function(err,res){
+                console.log(res[0].name)
+                function myUnlink(i,res){
+                    fs.unlink(res[i].path,function(err){
+                        if(err) throw err
+                    });
+                    console.log(res[i].name)
+                }
+                for(i=0;i<res.length;i++){
+                    myUnlink(i,res);
+                    }
+                res.writeHead(200, {'Content-type':'text/html'});
+                res.write("File successfully deleted")
+                res.end();
             });
         });
     });
