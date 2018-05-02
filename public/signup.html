@@ -24,7 +24,33 @@
 
 <body class="login-page" ng-app="myApp">
 	
-	<div class="page-header header-filter" style="background-image: url('assets2/img/bg13.jpg'); background-size: cover; background-position: top center;">
+	<nav class="navbar navbar-primary navbar-transparent navbar-absolute">
+    	<div class="container">
+        	<!-- Brand and toggle get grouped for better mobile display -->
+        	<div class="navbar-header">
+        		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
+            		<span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+        		</button>
+        		<a class="navbar-brand" href="#">LOGO</a>
+        	</div>
+
+        	<div class="collpase navbar-collapse">
+        		<ul class="nav navbar-nav navbar-right">
+    				
+					<li>
+    					<a href="/hrlogin">
+    						Login
+    					</a>
+    				</li>
+        		</ul>
+        	</div>
+    	</div>
+	</nav>
+	
+	<div class="page-header header-filter" style="background-image: url('assets2/img/bg12.jpg'); background-size: cover; background-position: top center;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
@@ -32,18 +58,6 @@
 						<form class="form" ng-controller="appController" ng-submit="send()">
 							<div class="header header-primary text-center">
 								<h4 class="card-title">Sign Up</h4>
-								<div class="social-line">
-									<a href="#pablo" class="btn btn-just-icon btn-simple">
-										<i class="fa fa-facebook-square"></i>
-									</a>
-									<a href="#pablo" class="btn btn-just-icon btn-simple">
-										<i class="fa fa-twitter"></i>
-									</a>
-									<a href="#pablo" class="btn btn-just-icon btn-simple">
-										<i class="fa fa-google-plus"></i>
-									</a>
-
-								</div>
 
 							</div>
 
@@ -132,7 +146,7 @@ I Accept Terms & Conditions and Privacy Policy                        </label>
 			}).then (function (response) {
 				console.log(response);
 				if(response.data=="Success"){
-					window.location.href="/loginpage.html";
+					window.location.href="/hrlogin";
 				}else{
 					$scope.error.pass="Email or password is incorrect";
 				}

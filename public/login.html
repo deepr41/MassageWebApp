@@ -6,7 +6,7 @@
 	<link rel="icon" type="image/png" href="assets2/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Sign Up</title>
+	<title>Login</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -23,7 +23,7 @@
 </head>
 
 <body class="login-page" ng-app="myApp">
-    <nav class="navbar navbar-primary navbar-transparent navbar-absolute">
+	<nav class="navbar navbar-primary navbar-transparent navbar-absolute">
     	<div class="container">
         	<!-- Brand and toggle get grouped for better mobile display -->
         	<div class="navbar-header">
@@ -40,58 +40,45 @@
         		<ul class="nav navbar-nav navbar-right">
     				
 					<li>
-    					<a href="/logout">
-    						Logout
+    					<a href="/hrsignup">
+    						Register
     					</a>
     				</li>
         		</ul>
         	</div>
     	</div>
     </nav>
-
+	
 	<div class="page-header header-filter" style="background-image: url('assets2/img/bg12.jpg'); background-size: cover; background-position: top center;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 					<div class="card card-signup">
-						<form class="form" ng-controller="appController" >
+						<form class="form" ng-controller='appController' ng-submit="send()">
 							<div class="header header-primary text-center">
-								<h4 class="card-title">User Details</h4>
+								<h4 class="card-title">Log in</h4>
 							</div>
-
 							<div class="card-content">
 
 								<div class="input-group">
 									<span class="input-group-addon">
-										<i class="material-icons">face</i>
+										<i class="material-icons">email</i>
 									</span>
-									<input type="text" class="form-control" placeholder="First Name..." ng-model="data.fname">
-									<span>{{error.fname}}</span>
+									<input type="text" class="form-control" placeholder="Email..." name="email" ng-model="data.email">
+									<span>{{error.email}}</span>
 								</div>
 
 								<div class="input-group">
 									<span class="input-group-addon">
-										<i class="material-icons">face</i>
+										<i class="material-icons">lock_outline</i>
 									</span>
-									<input type="text" class="form-control" placeholder="Last Name..." ng-model="data.lname">
-									<span>{{error.lname}}</span>
+									<input type="password" placeholder="Password..." class="form-control" name="pass" ng-model="data.pass"/>
+									<span>{{error.pass}}</span>
 								</div>
-								
-								<div class="input-group">
-									<span class="input-group-addon">
-										<i class="material-icons">email</i>
-									</span>
-									<input type="text" class="form-control" placeholder="Email..." ng-model="data.email" readonly>
-									<span>{{error.email}}</span>
-                                </div>
-                                
 							</div>
-							                      <div class="checkbox">
-                      </div>
 							<div class="footer text-center">
-                      <button  class="btn btn-primary " ng-click="send()">Update</button>
-                      <button  class="btn btn-primary " ng-click="delete()">Delete Account</button>
-                            </div>
+                      <button type="submit" class="btn btn-primary ">Submit</button>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -100,7 +87,6 @@
 	</div>
 
 </body>
-
 <script> var myModule = angular.module("myApp",[])  </script>
 <script>
 	myModule.controller ("appController",
@@ -109,30 +95,7 @@
 		$scope.data = {}
 		$scope.error = {}
 		$scope.response = {}
-        var options = window.location.search.slice(1)
-                      .split('&')
-                      .reduce(function _reduce (/*Object*/ a, /*String*/ b) {
-                        b = b.split('=');
-                        a[b[0]] = decodeURIComponent(b[1]);
-                        return a;
-                      }, {});
-
-        console.log(options);
-        var posting = $http({
-            method: 'POST',
-            url: '/fetch',
-            data: options,
-        }).then (function (response) {
-            console.log(response);
-            var obj = response.data;
-            console.log("Reached here : "+JSON.stringify(obj));
-            $scope.data.fname=obj.fname;
-            $scope.data.lname=obj.lname;
-            $scope.data.email=obj.email;
-        },function (error){
-            console.log(error);
-        });
-        
+		
 		$scope.send = function () {
 			if(!$scope.validate()){
 				console.log("Error");
@@ -142,54 +105,32 @@
 			console.log(JSON.stringify($scope.data));
 			var posting = $http({
 				method: 'POST',
-				url: '/update',
+				url: '/login',
 				data: $scope.data,
 			}).then (function (response) {
 				console.log(response);
 				if(response.data=="Success"){
-					window.location.href="/hrprofile?email="+$scope.data.email;
+					window.location.href="/hrprofile";
 				}else{
-					$scope.error.email="Couldn't update";
+					$scope.error.pass="Email or password is incorrect";
 				}
 			},function (error){
 				console.log(error);
-		    });
-        }
-        
-        $scope.delete = function () {
-			/*executed when submit is clicked*/
-			console.log(JSON.stringify($scope.data));
-			var posting = $http({
-				method: 'POST',
-				url: '/delete',
-				data: $scope.data,
-			}).then (function (response) {
-				console.log(response);
-				if(response.data=="Success"){
-					window.location.href="/hrlogin";
-				}else{
-					$scope.error.email="Something went wrong";
-				}
-			},function (error){
-				console.log(error);
-		    });
+		});
 		}
 
 		$scope.validate = function(){
 			console.log("reached here");
 			$scope.error.email="";
-			$scope.error.fname="";
-			$scope.error.lname="";
-
-			if($scope.data.fname===undefined || $scope.data.fname==""){
-				$scope.error.fname="Name cant be empty";
+			$scope.error.pass="";
+			if($scope.data.email===undefined || $scope.data.email==""){
+				$scope.error.email="Email cant be empty";
 				return false;
 			}
-			if($scope.data.lname===undefined || $scope.data.lname==""){
-				$scope.error.lname="Name cant be empty";
+			if($scope.data.pass===undefined || $scope.data.pass==""){
+				$scope.error.pass="Password cant be empty";
 				return false;
 			}
-
 			return true;
 		}
 	});

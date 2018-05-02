@@ -4,13 +4,14 @@
   "description": "A website for massage providers with dash board",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zecaro/MassageWebApp.git"
   },
-  "author": "Deepak",
+  "author": "Rahul",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zecaro/MassageWebApp/issues"
@@ -18,7 +19,9 @@
   "homepage": "https://github.com/zecaro/MassageWebApp#readme",
   "dependencies": {
     "angular": "^1.6.10",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
+    "express-cookies": "^1.4.7",
     "mongodb": "^3.0.7"
   }
 }
